@@ -1,0 +1,15 @@
+{
+    "c1": {
+    "nombre": "David Jiménez",
+    "fechaNacimiento": "20/01/1989",
+    "telefonos": [
+    { "tipo": "casa", "numero": 917371235 },
+    { "tipo": "trabajo", "numero": 914483124 }
+    ]
+    },
+    "c2": {
+    "nombre": "Luis García",
+    "fechaNacimiento": "15/03/1979",
+    "telefonos" : []
+    }
+    }
