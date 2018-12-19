@@ -21,6 +21,7 @@ const middlewareSession = session({
 });
 
 
+
 app.listen(config.port, function (err) {
     if (err) {
         console.log("ERROR al iniciar el servidor");
@@ -55,29 +56,66 @@ app.get("/contactos/:id_indice", function (request, response) {
     }
 })
 
-app.post("/contactos", function(request,response){
-    let nuevoElemento= request.bodyM
+app.post("/contactos", function (request, response) {
+    let nuevoElemento = request.bodyM
     agenda.push(nuevoElemento);
     response.status(201);
     response.end();
 })
-app.delete("/contactos/:indice", function(request,response){
+app.delete("/contactos/:indice", function (request, response) {
     let indice = Number(request.params.indice);
-    if(!isNaN(indice) && agenda[indice] !== undefined){
-        agenda.splice(indice,1);
+    if (!isNaN(indice) && agenda[indice] !== undefined) {
+        agenda.splice(indice, 1);
         response.status(200);
     }
-    else{
+    else {
         response.status(404)
     }
     response.end();
 })
-app.put("/contactos/:indice", function(request, response){
+app.put("/contactos/:indice", function (request, response) {
     let indice = Number(request.params.indice);
-    if(!isNaN(indice) && agenda[indice] !== undefined){
+    if (!isNaN(indice) && agenda[indice] !== undefined) {
         agenda[indice] = request.body;
-    } else{
+    } else {
         response.status(404);
+    }
+    response.end();
+})
+
+//Practica Guiada
+let tasks = [
+    { id: 1, text: "Comprar billetes de avión" },
+    { id: 2, text: "Hacer las maletas" },
+    { id: 3, text: "Comprar regalos de reyes" },
+    { id: 4, text: "Reservar coche" }
+];
+
+app.get("/tasks", function (request, response) {
+    response.json(tasks);
+    response.status(200);
+})
+app.post("/tasks", function (request, response) {
+    let nuevoElemento = request.body
+    let ida = tasks.length;
+    let objeto = { id : ida, text : nuevoElemento};
+    tasks.push(objeto);
+    response.status(201);
+    response.end();
+})
+app.delete("/tasks/:indice", function (request, response) {
+    let indice = Number(request.params.indice);
+    if (!isNaN(indice)) {
+        if( tasks[indice] !== undefined){
+        tasks.splice(indice, 1);
+        response.status(200);
+        }
+        else{
+            response.status(400);
+        }
+    }
+    else {
+        response.status(404)
     }
     response.end();
 })
